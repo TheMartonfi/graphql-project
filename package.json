@@ -1,11 +1,17 @@
 {
-  "name": "graphql-project",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:TheMartonfi/graphql-project.git",
-  "author": "TheMartonfi <carlmartonfi@hotmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+	"name": "graphql-project",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "git@github.com:TheMartonfi/graphql-project.git",
+	"author": "TheMartonfi <carlmartonfi@hotmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "nodemon server/app.js"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"express-graphql": "^0.12.0",
+		"graphql": "^15.4.0",
+		"nodemon": "^2.0.6"
+	}
 }
