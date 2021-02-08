@@ -58,7 +58,8 @@ const {
 	GraphQLID,
 	GraphQLString,
 	GraphQLInt,
-	GraphQLSchema
+	GraphQLSchema,
+	GraphQLList
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -68,7 +69,19 @@ const UserType = new GraphQLObjectType({
 		id: { type: GraphQLID },
 		name: { type: GraphQLString },
 		age: { type: GraphQLInt },
-		country: { type: GraphQLString }
+		country: { type: GraphQLString },
+		hobbies: {
+			type: new GraphQLList(HobbyType),
+			resolve(parent, args) {
+				return hobbiesData.filter((hobby) => hobby.userId === parent.id);
+			}
+		},
+		posts: {
+			type: new GraphQLList(PostType),
+			resolve(parent, args) {
+				return postsData.filter((post) => post.userId === parent.id);
+			}
+		}
 	})
 });
 
