@@ -1,55 +1,58 @@
 const graphql = require("graphql");
+const User = require("../model/user");
+const Hobby = require("../model/hobby");
+const Post = require("../model/post");
 
-const usersData = [
-	{ id: "1", name: "Bond", age: 36, country: "Japan" },
-	{ id: "13", name: "Anna", age: 26, country: "Canada" },
-	{ id: "211", name: "Bella", age: 16, country: "United States" },
-	{ id: "19", name: "Gina", age: 26, country: "South Korea" },
-	{ id: "150", name: "Georgina", age: 36, country: "France" },
-	{ id: "293", name: "Bob", age: 48, country: "Germany" },
-	{ id: "392", name: "Timmy", age: 6, country: "Taco Bell" }
-];
+// const usersData = [
+// 	{ id: "1", name: "Bond", age: 36, country: "Japan" },
+// 	{ id: "13", name: "Anna", age: 26, country: "Canada" },
+// 	{ id: "211", name: "Bella", age: 16, country: "United States" },
+// 	{ id: "19", name: "Gina", age: 26, country: "South Korea" },
+// 	{ id: "150", name: "Georgina", age: 36, country: "France" },
+// 	{ id: "293", name: "Bob", age: 48, country: "Germany" },
+// 	{ id: "392", name: "Timmy", age: 6, country: "Taco Bell" }
+// ];
 
-const hobbiesData = [
-	{
-		id: "1",
-		title: "Programming",
-		description: "Using computers to make the world a better place",
-		userId: "1"
-	},
-	{
-		id: "2",
-		title: "Rowing",
-		description: "Sweat and feel better before eating donuts",
-		userId: "13"
-	},
-	{
-		id: "3",
-		title: "Swimming",
-		description: "Get in the water and learn to become the water",
-		userId: "293"
-	},
-	{
-		id: "4",
-		title: "Fencing",
-		description: "A hobby for fancy people",
-		userId: "392"
-	},
-	{
-		id: "5",
-		title: "Hiking",
-		description: "Wear hiking boots and explore the world",
-		userId: "19"
-	}
-];
+// const hobbiesData = [
+// 	{
+// 		id: "1",
+// 		title: "Programming",
+// 		description: "Using computers to make the world a better place",
+// 		userId: "1"
+// 	},
+// 	{
+// 		id: "2",
+// 		title: "Rowing",
+// 		description: "Sweat and feel better before eating donuts",
+// 		userId: "13"
+// 	},
+// 	{
+// 		id: "3",
+// 		title: "Swimming",
+// 		description: "Get in the water and learn to become the water",
+// 		userId: "293"
+// 	},
+// 	{
+// 		id: "4",
+// 		title: "Fencing",
+// 		description: "A hobby for fancy people",
+// 		userId: "392"
+// 	},
+// 	{
+// 		id: "5",
+// 		title: "Hiking",
+// 		description: "Wear hiking boots and explore the world",
+// 		userId: "19"
+// 	}
+// ];
 
-const postsData = [
-	{ id: "1", comment: "Building a mind", userId: "1" },
-	{ id: "2", comment: "GraphQL is Amazing", userId: "1" },
-	{ id: "3", comment: "How to Change the World", userId: "19" },
-	{ id: "4", comment: "How to Change the World", userId: "211" },
-	{ id: "5", comment: "How to Change the World", userId: "1" }
-];
+// const postsData = [
+// 	{ id: "1", comment: "Building a mind", userId: "1" },
+// 	{ id: "2", comment: "GraphQL is Amazing", userId: "1" },
+// 	{ id: "3", comment: "How to Change the World", userId: "19" },
+// 	{ id: "4", comment: "How to Change the World", userId: "211" },
+// 	{ id: "5", comment: "How to Change the World", userId: "1" }
+// ];
 
 const {
 	GraphQLObjectType,
@@ -71,13 +74,13 @@ const UserType = new GraphQLObjectType({
 		hobbies: {
 			type: new GraphQLList(HobbyType),
 			resolve(parent, args) {
-				return hobbiesData.filter((hobby) => hobby.userId === parent.id);
+				// return hobbiesData.filter((hobby) => hobby.userId === parent.id);
 			}
 		},
 		posts: {
 			type: new GraphQLList(PostType),
 			resolve(parent, args) {
-				return postsData.filter((post) => post.userId === parent.id);
+				// return postsData.filter((post) => post.userId === parent.id);
 			}
 		}
 	})
@@ -93,7 +96,7 @@ const HobbyType = new GraphQLObjectType({
 		user: {
 			type: UserType,
 			resolve(parent, args) {
-				return usersData.find((user) => user.id === parent.userId);
+				// return usersData.find((user) => user.id === parent.userId);
 			}
 		}
 	})
@@ -108,7 +111,7 @@ const PostType = new GraphQLObjectType({
 		user: {
 			type: UserType,
 			resolve(parent, args) {
-				return usersData.find((user) => user.id === parent.userId);
+				// return usersData.find((user) => user.id === parent.userId);
 			}
 		}
 	})
@@ -122,7 +125,7 @@ const RootQuery = new GraphQLObjectType({
 			type: UserType,
 			args: { id: { type: GraphQLID } },
 			resolve(parent, args) {
-				return usersData.find((user) => user.id === args.id);
+				// return usersData.find((user) => user.id === args.id);
 			}
 		},
 
@@ -130,7 +133,7 @@ const RootQuery = new GraphQLObjectType({
 			type: HobbyType,
 			args: { id: { type: GraphQLID } },
 			resolve(parent, args) {
-				return hobbiesData.find((hobby) => hobby.id === args.id);
+				// return hobbiesData.find((hobby) => hobby.id === args.id);
 			}
 		},
 
@@ -138,28 +141,28 @@ const RootQuery = new GraphQLObjectType({
 			type: PostType,
 			args: { id: { type: GraphQLID } },
 			resolve(parent, args) {
-				return postsData.find((post) => post.id === args.id);
+				// return postsData.find((post) => post.id === args.id);
 			}
 		},
 
 		users: {
 			type: new GraphQLList(UserType),
 			resolve(parent, args) {
-				return usersData;
+				// return usersData;
 			}
 		},
 
 		hobbies: {
 			type: new GraphQLList(HobbyType),
 			resolve(parent, args) {
-				return hobbiesData;
+				// return hobbiesData;
 			}
 		},
 
 		posts: {
 			type: new GraphQLList(PostType),
 			resolve(parent, args) {
-				return postsData;
+				// return postsData;
 			}
 		}
 	}
@@ -171,47 +174,56 @@ const Mutation = new GraphQLObjectType({
 		createUser: {
 			type: UserType,
 			args: {
-				// id: { type: GraphQLID },
 				name: { type: GraphQLString },
 				age: { type: GraphQLInt },
 				country: { type: GraphQLString }
 			},
 			resolve(parent, args) {
-				return {
+				const user = new User({
 					name: args.name,
 					age: args.age,
 					country: args.country
-				};
+				});
+
+				user.save();
+
+				return user;
 			}
 		},
 		createHobby: {
 			type: HobbyType,
 			args: {
-				// id: { type: GraphQLID },
 				title: { type: GraphQLString },
 				description: { type: GraphQLString },
 				userId: { type: GraphQLID }
 			},
 			resolve(parent, args) {
-				return {
+				const hobby = new Hobby({
 					title: args.title,
 					description: args.description,
 					userId: args.userId
-				};
+				});
+
+				hobby.save();
+
+				return hobby;
 			}
 		},
 		createPost: {
 			type: PostType,
 			args: {
-				// id: { type: GraphQLID },
 				comment: { type: GraphQLString },
 				userId: { type: GraphQLID }
 			},
 			resolve(parent, args) {
-				return {
+				const post = new Post({
 					comment: args.comment,
 					userId: args.userId
-				};
+				});
+
+				post.save();
+
+				return post;
 			}
 		}
 	}
