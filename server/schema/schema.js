@@ -1,7 +1,5 @@
 const graphql = require("graphql");
-// const _ = require("lodash");
 
-// dummy data
 const usersData = [
 	{ id: "1", name: "Bond", age: 36, country: "Japan" },
 	{ id: "13", name: "Anna", age: 26, country: "Canada" },
@@ -166,8 +164,6 @@ const RootQuery = new GraphQLObjectType({
 		}
 	}
 });
-
-// Mutations
 
 const Mutation = new GraphQLObjectType({
 	name: "Mutation",
