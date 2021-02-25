@@ -9,7 +9,8 @@ const {
 	GraphQLString,
 	GraphQLInt,
 	GraphQLSchema,
-	GraphQLList
+	GraphQLList,
+	GraphQLNonNull
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -123,8 +124,8 @@ const Mutation = new GraphQLObjectType({
 		createUser: {
 			type: UserType,
 			args: {
-				name: { type: GraphQLString },
-				age: { type: GraphQLInt },
+				name: { type: new GraphQLNonNull(GraphQLString) },
+				age: { type: new GraphQLNonNull(GraphQLInt) },
 				country: { type: GraphQLString }
 			},
 			resolve(parent, args) {
@@ -134,17 +135,15 @@ const Mutation = new GraphQLObjectType({
 					country: args.country
 				});
 
-				user.save();
-
-				return user;
+				return user.save();
 			}
 		},
 		createHobby: {
 			type: HobbyType,
 			args: {
-				title: { type: GraphQLString },
-				description: { type: GraphQLString },
-				userId: { type: GraphQLID }
+				title: { type: new GraphQLNonNull(GraphQLString) },
+				description: { type: new GraphQLNonNull(GraphQLString) },
+				userId: { type: new GraphQLNonNull(GraphQLID) }
 			},
 			resolve(parent, args) {
 				const hobby = new Hobby({
@@ -153,16 +152,14 @@ const Mutation = new GraphQLObjectType({
 					userId: args.userId
 				});
 
-				hobby.save();
-
-				return hobby;
+				return hobby.save();
 			}
 		},
 		createPost: {
 			type: PostType,
 			args: {
-				comment: { type: GraphQLString },
-				userId: { type: GraphQLID }
+				comment: { type: new GraphQLNonNull(GraphQLString) },
+				userId: { type: new GraphQLNonNull(GraphQLID) }
 			},
 			resolve(parent, args) {
 				const post = new Post({
@@ -170,9 +167,7 @@ const Mutation = new GraphQLObjectType({
 					userId: args.userId
 				});
 
-				post.save();
-
-				return post;
+				return post.save();
 			}
 		}
 	}
